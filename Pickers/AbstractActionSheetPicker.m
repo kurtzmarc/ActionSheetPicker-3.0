@@ -428,8 +428,6 @@ CG_INLINE BOOL isIPhone4()
 
 - (void)presentPickerForView:(UIView *)aView
 {
-    self.presentFromRect = aView.frame;
-
     if ( IS_IPAD )
         [self configureAndPresentPopoverForView:aView];
     else
@@ -504,7 +502,7 @@ CG_INLINE BOOL isIPhone4()
     }
     else if ( (self.containerView) )
     {
-        [popover presentPopoverFromRect:_containerView.bounds inView:_containerView
+        [popover presentPopoverFromRect:(CGRectIsEmpty(_presentFromRect) ? _containerView.bounds : _presentFromRect) inView:_containerView
                permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         return;
     }
